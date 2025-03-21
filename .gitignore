@@ -51,3 +51,7 @@ Thumbs.db
 /spring-mvc-01-web/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
 /spring-mvc-01-web/target/
 /spring-mvc-01-web/src/main/resources/jdbc.properties
+/spring-zboot-web/.mvn/
+/spring-zboot-web/.gitignore
+/spring-zboot-web/.gitattributes
+/spring-zboot-web/target/
