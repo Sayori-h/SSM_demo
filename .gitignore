@@ -55,3 +55,5 @@ Thumbs.db
 /spring-zboot-web/.gitignore
 /spring-zboot-web/.gitattributes
 /spring-zboot-web/target/
+/springBoot-web-myBatis/target/
+/springBoot-web-myBatis/.gitattributes

@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: springBoot-web-myBatis
+  datasource:
+    username: 496uhz7yBTyuZvt.root
+    password: XO9dNYDQTxdlRU1d
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://gateway01.ap-northeast-1.prod.aws.tidbcloud.com:4000/IMServer
+    hikari:
+      #最大连接数，默认是10
+      maximum-pool-size: 30
+      #最小空闲连接，默认是10
+      minimum-idle: 30
+      #等待连接池分配连接的最大时长，超过该时长还没有可用连接则发生超时异常（单位毫秒）
+      connection-timeout: 5000
+      #空闲连接的最大时长，空闲多久就被释放回收，设置为0不让连接回收
+      idle-timeout: 0
+      #一个连接的最大生命时间，超过该时间还没有使用就回收掉（单位毫秒）
+      #在MySQL数据库中，一个连接的最大存活时间通常是由wait_timeout参数来控制的。这个参数定义了非交互式连接可以保持空闲的最长时间，超过这个时间后，连接将被自动关闭。默认情况下，wait_timeout的值是28800秒，也就是8小时。不过，这个值是可以根据需要进行调整的。你可以通过修改MySQL的配置文件（通常是my.cnf或my.ini），在[mysqld]部分设置wait_timeout的值来更改最大连接存活时间。
+      max-lifetime: 18000000
+
+
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml

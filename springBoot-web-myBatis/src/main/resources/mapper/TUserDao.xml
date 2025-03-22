@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.powernode.mapper.TUserDao">
+  <resultMap id="BaseResultMap" type="com.powernode.entity.TUser">
+    <id column="f_user_id" jdbcType="BIGINT" property="fUserId" />
+    <result column="f_address" jdbcType="VARCHAR" property="fAddress" />
+    <result column="f_birthday" jdbcType="BIGINT" property="fBirthday" />
+    <result column="f_customface" jdbcType="VARCHAR" property="fCustomface" />
+    <result column="f_customfacefmt" jdbcType="VARCHAR" property="fCustomfacefmt" />
+    <result column="f_facetype" jdbcType="INTEGER" property="fFacetype" />
+    <result column="f_gender" jdbcType="INTEGER" property="fGender" />
+    <result column="f_id" jdbcType="BIGINT" property="fId" />
+    <result column="f_mail" jdbcType="VARCHAR" property="fMail" />
+    <result column="f_nickname" jdbcType="VARCHAR" property="fNickname" />
+    <result column="f_owner_id" jdbcType="BIGINT" property="fOwnerId" />
+    <result column="f_password" jdbcType="VARCHAR" property="fPassword" />
+    <result column="f_phonenumber" jdbcType="VARCHAR" property="fPhonenumber" />
+    <result column="f_register_time" jdbcType="TIMESTAMP" property="fRegisterTime" />
+    <result column="f_remark" jdbcType="VARCHAR" property="fRemark" />
+    <result column="f_signature" jdbcType="VARCHAR" property="fSignature" />
+    <result column="f_update_time" jdbcType="TIMESTAMP" property="fUpdateTime" />
+    <result column="f_username" jdbcType="VARCHAR" property="fUsername" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    f_user_id, f_address, f_birthday, f_customface, f_customfacefmt, f_facetype, f_gender, 
+    f_id, f_mail, f_nickname, f_owner_id, f_password, f_phonenumber, f_register_time, 
+    f_remark, f_signature, f_update_time, f_username
+  </sql>
+  <select id="selectByPage" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_user
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_user
+    where f_user_id = #{fId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_user
+    where f_user_id = #{fId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="f_user_id" keyProperty="fUserId" parameterType="com.powernode.entity.TUser" useGeneratedKeys="true">
+    insert into t_user (f_address, f_birthday, f_customface, 
+      f_customfacefmt, f_facetype, f_gender, 
+      f_id, f_mail, f_nickname, 
+      f_owner_id, f_password, f_phonenumber, 
+      f_register_time, f_remark, f_signature, 
+      f_update_time, f_username)
+    values (#{fAddress,jdbcType=VARCHAR}, #{fBirthday,jdbcType=BIGINT}, #{fCustomface,jdbcType=VARCHAR}, 
+      #{fCustomfacefmt,jdbcType=VARCHAR}, #{fFacetype,jdbcType=INTEGER}, #{fGender,jdbcType=INTEGER}, 
+      #{fId,jdbcType=BIGINT}, #{fMail,jdbcType=VARCHAR}, #{fNickname,jdbcType=VARCHAR}, 
+      #{fOwnerId,jdbcType=BIGINT}, #{fPassword,jdbcType=VARCHAR}, #{fPhonenumber,jdbcType=VARCHAR}, 
+      #{fRegisterTime,jdbcType=TIMESTAMP}, #{fRemark,jdbcType=VARCHAR}, #{fSignature,jdbcType=VARCHAR}, 
+      #{fUpdateTime,jdbcType=TIMESTAMP}, #{fUsername,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="f_user_id" keyProperty="fUserId" parameterType="com.powernode.entity.TUser" useGeneratedKeys="true">
+    insert into t_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fAddress != null">
+        f_address,
+      </if>
+      <if test="fBirthday != null">
+        f_birthday,
+      </if>
+      <if test="fCustomface != null">
+        f_customface,
+      </if>
+      <if test="fCustomfacefmt != null">
+        f_customfacefmt,
+      </if>
+      <if test="fFacetype != null">
+        f_facetype,
+      </if>
+      <if test="fGender != null">
+        f_gender,
+      </if>
+      <if test="fId != null">
+        f_id,
+      </if>
+      <if test="fMail != null">
+        f_mail,
+      </if>
+      <if test="fNickname != null">
+        f_nickname,
+      </if>
+      <if test="fOwnerId != null">
+        f_owner_id,
+      </if>
+      <if test="fPassword != null">
+        f_password,
+      </if>
+      <if test="fPhonenumber != null">
+        f_phonenumber,
+      </if>
+      <if test="fRegisterTime != null">
+        f_register_time,
+      </if>
+      <if test="fRemark != null">
+        f_remark,
+      </if>
+      <if test="fSignature != null">
+        f_signature,
+      </if>
+      <if test="fUpdateTime != null">
+        f_update_time,
+      </if>
+      <if test="fUsername != null">
+        f_username,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fAddress != null">
+        #{fAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="fBirthday != null">
+        #{fBirthday,jdbcType=BIGINT},
+      </if>
+      <if test="fCustomface != null">
+        #{fCustomface,jdbcType=VARCHAR},
+      </if>
+      <if test="fCustomfacefmt != null">
+        #{fCustomfacefmt,jdbcType=VARCHAR},
+      </if>
+      <if test="fFacetype != null">
+        #{fFacetype,jdbcType=INTEGER},
+      </if>
+      <if test="fGender != null">
+        #{fGender,jdbcType=INTEGER},
+      </if>
+      <if test="fId != null">
+        #{fId,jdbcType=BIGINT},
+      </if>
+      <if test="fMail != null">
+        #{fMail,jdbcType=VARCHAR},
+      </if>
+      <if test="fNickname != null">
+        #{fNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="fOwnerId != null">
+        #{fOwnerId,jdbcType=BIGINT},
+      </if>
+      <if test="fPassword != null">
+        #{fPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="fPhonenumber != null">
+        #{fPhonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="fRegisterTime != null">
+        #{fRegisterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fRemark != null">
+        #{fRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="fSignature != null">
+        #{fSignature,jdbcType=VARCHAR},
+      </if>
+      <if test="fUpdateTime != null">
+        #{fUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fUsername != null">
+        #{fUsername,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.powernode.entity.TUser">
+    update t_user
+    <set>
+      <if test="fAddress != null">
+        f_address = #{fAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="fBirthday != null">
+        f_birthday = #{fBirthday,jdbcType=BIGINT},
+      </if>
+      <if test="fCustomface != null">
+        f_customface = #{fCustomface,jdbcType=VARCHAR},
+      </if>
+      <if test="fCustomfacefmt != null">
+        f_customfacefmt = #{fCustomfacefmt,jdbcType=VARCHAR},
+      </if>
+      <if test="fFacetype != null">
+        f_facetype = #{fFacetype,jdbcType=INTEGER},
+      </if>
+      <if test="fGender != null">
+        f_gender = #{fGender,jdbcType=INTEGER},
+      </if>
+      <if test="fUserId != null">
+        f_user_id = #{fUserId,jdbcType=BIGINT},
+      </if>
+      <if test="fMail != null">
+        f_mail = #{fMail,jdbcType=VARCHAR},
+      </if>
+      <if test="fNickname != null">
+        f_nickname = #{fNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="fOwnerId != null">
+        f_owner_id = #{fOwnerId,jdbcType=BIGINT},
+      </if>
+      <if test="fPassword != null">
+        f_password = #{fPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="fPhonenumber != null">
+        f_phonenumber = #{fPhonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="fRegisterTime != null">
+        f_register_time = #{fRegisterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fRemark != null">
+        f_remark = #{fRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="fSignature != null">
+        f_signature = #{fSignature,jdbcType=VARCHAR},
+      </if>
+      <if test="fUpdateTime != null">
+        f_update_time = #{fUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fUsername != null">
+        f_username = #{fUsername,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where f_id = #{fId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.powernode.entity.TUser">
+    update t_user
+    set f_address = #{fAddress,jdbcType=VARCHAR},
+      f_birthday = #{fBirthday,jdbcType=BIGINT},
+      f_customface = #{fCustomface,jdbcType=VARCHAR},
+      f_customfacefmt = #{fCustomfacefmt,jdbcType=VARCHAR},
+      f_facetype = #{fFacetype,jdbcType=INTEGER},
+      f_gender = #{fGender,jdbcType=INTEGER},
+      f_user_id = #{fUserId,jdbcType=BIGINT},
+      f_mail = #{fMail,jdbcType=VARCHAR},
+      f_nickname = #{fNickname,jdbcType=VARCHAR},
+      f_owner_id = #{fOwnerId,jdbcType=BIGINT},
+      f_password = #{fPassword,jdbcType=VARCHAR},
+      f_phonenumber = #{fPhonenumber,jdbcType=VARCHAR},
+      f_register_time = #{fRegisterTime,jdbcType=TIMESTAMP},
+      f_remark = #{fRemark,jdbcType=VARCHAR},
+      f_signature = #{fSignature,jdbcType=VARCHAR},
+      f_update_time = #{fUpdateTime,jdbcType=TIMESTAMP},
+      f_username = #{fUsername,jdbcType=VARCHAR}
+    where f_id = #{fId,jdbcType=BIGINT}
+  </update>
+</mapper>

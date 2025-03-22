@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: spring-zboot-web
+  main:
+    banner-mode: console
+
+server:
+  port: 8080
+  servlet:
+    context-path: /spring-boot-base
+
+# 自定义属性示例
+custom:
+  api:
+    endpoint: https://api.example.com/v1
+    timeout: 5000
+    enabled: true
+    max-retries: 3
