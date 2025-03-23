@@ -3,6 +3,8 @@ package com.powernode.controller;
 import com.github.pagehelper.PageHelper;
 import com.powernode.constant.Constants;
 import com.powernode.entity.TUser;
+import com.powernode.result.CodeEnum;
+import com.powernode.result.R;
 import com.powernode.service.HelloService;
 import com.powernode.service.UserService;
 import jakarta.annotation.Resource;
@@ -23,30 +25,28 @@ public class HelloController {
 
     @RequestMapping(value = "/web/hello") //映射请求的路径
     public @ResponseBody String hello() {
-        //方法参数注入，model对象我们并没有自己去创建，而是spring框架给我们创建好的，我们直接通过方法参数注入即可使用
-        // model是一个容器（底层是一个Map）,里面用于放数据，以键值对的方式放数据
-
         //调用service
         return helloService.hello();  //前缀 + “return的值” + 后缀，就可以找到页面 （/admin/main.jsp）
     }
 
     //如果前端请求路径在controller方法中找不到，那报404，比如访问/api/user就是404
     @RequestMapping(value = "/web/user")
-    public @ResponseBody TUser user() {
+    public @ResponseBody R user() {
         // 调用UserService获取用户数据（例如用户列表）
-        return userService.getUserById(10001L);
+        TUser userById = userService.getUserById(10001L);
+        return R.OK(CodeEnum.OK, userById);
     }
 
     @RequestMapping(value = "/web/page")
-    public @ResponseBody Object page(
+    public @ResponseBody R page(
             @RequestParam(value="current") Integer current) {
         // 调用UserService获取用户数据（例如用户列表）
-        return userService.getUserByPage(current);
+        return R.OK(CodeEnum.OK, userService.getUserByPage(current));
     }
 
     @RequestMapping(value = "/web/trans")
-    public @ResponseBody int trans() {
+    public @ResponseBody R trans() {
         // 调用UserService获取用户数据（例如用户列表）
-        return userService.upDateUser();
+        return userService.upDateUser()>=1?R.OK(CodeEnum.OK):R.FAIL(CodeEnum.FAIL);
     }
 }
