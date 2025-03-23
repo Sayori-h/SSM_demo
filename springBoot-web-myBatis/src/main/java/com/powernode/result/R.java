@@ -45,4 +45,11 @@ public class R {
                 .msg(codeEnum.getMsg())
                 .build();
     }
+
+    public static R FAIL(CodeEnum codeEnum,String msg) {
+        return R.builder()
+                .code(codeEnum.getCode())
+                .msg(msg)
+                .build();
+    }
 }
