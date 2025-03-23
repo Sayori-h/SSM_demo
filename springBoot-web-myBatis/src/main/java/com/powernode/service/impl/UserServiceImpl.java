@@ -38,6 +38,7 @@ public class UserServiceImpl implements UserService {
         TUser tUser = new TUser();
         tUser.setFId(30001L);
         tUser.setFNickname("麦克阿瑟");
+        int a=1/0;
         return TUserDao.updateByPrimaryKeySelective(tUser);
     }
 }

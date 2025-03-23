@@ -57,3 +57,4 @@ Thumbs.db
 /spring-zboot-web/target/
 /springBoot-web-myBatis/target/
 /springBoot-web-myBatis/.gitattributes
+/springBoot-web-myBatis/src/main/resources/static/images/
