@@ -58,3 +58,4 @@ Thumbs.db
 /springBoot-web-myBatis/target/
 /springBoot-web-myBatis/.gitattributes
 /springBoot-web-myBatis/src/main/resources/static/images/
+/springBoot-web-myBatis/src/main/resources/log/

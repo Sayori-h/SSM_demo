@@ -27,3 +27,41 @@ server:
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
+
+#配置springboot框架的日志打印级别是debug
+#debug: true
+#trace: true
+logging:
+  level:
+    #粗略的日志级别控制，那就是所有的类都打印info级别的日志
+    root: debug
+    #只配置了sql，没有配置root，但是root还是info，也就是默认root可以不配
+    sql: error
+    #但是mybatis包下的类采用error级别打印，其它类还是采用root所配置的日志级别打印
+    org.mybatis: error
+    #配置我们自己的类的日志打印级别
+    com.powernode: debug
+    #指定我们自定义的分组下的包采用什么日志打印级别
+    powernode: debug
+
+  #自定义分组（组名：powernode）
+  group:
+    powernode: com.powernode,com.bjpowernode
+
+  #把日志打印到文件中
+  file:
+    #name: spring-boot.log
+    path: springBoot-web-myBatis/src/main/resources/log
+
+  logback:
+    rolling-policy:
+      #日志文件达到多大时进行归档
+      max-file-size: 500MB
+      #所有的归档日志文件总共达到多大时进行删除，默认是0B表示不删除
+      total-size-cap: 50GB
+      #归档日志文件最多保留几天
+      max-history: 60
+      #启动项目时是否要清理归档日志文件
+      clean-history-on-start: false
+      #归档日志文件名的格式
+      file-name-pattern: ${LOG_FILE}.%d{yyyy-MM-dd}.%i.gz
