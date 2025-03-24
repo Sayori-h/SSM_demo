@@ -34,7 +34,7 @@ mybatis:
 logging:
   level:
     #粗略的日志级别控制，那就是所有的类都打印info级别的日志
-    root: debug
+    root: info
     #只配置了sql，没有配置root，但是root还是info，也就是默认root可以不配
     sql: error
     #但是mybatis包下的类采用error级别打印，其它类还是采用root所配置的日志级别打印
@@ -42,7 +42,7 @@ logging:
     #配置我们自己的类的日志打印级别
     com.powernode: debug
     #指定我们自定义的分组下的包采用什么日志打印级别
-    powernode: debug
+    #powernode: debug
 
   #自定义分组（组名：powernode）
   group:

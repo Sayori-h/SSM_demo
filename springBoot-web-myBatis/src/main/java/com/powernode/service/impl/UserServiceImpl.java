@@ -20,8 +20,8 @@ public class UserServiceImpl implements UserService {
     private TUserDao TUserDao;
 
     @Override
-    public TUser getUserById(Long userId) {
-        return TUserDao.selectByPrimaryKey(userId);
+    public TUser getUserById(Long fId) {
+        return TUserDao.selectByPrimaryKey(fId);
     }
 
     @Override
@@ -40,5 +40,21 @@ public class UserServiceImpl implements UserService {
         tUser.setFNickname("麦克阿瑟");
         int a=1/0;
         return TUserDao.updateByPrimaryKeySelective(tUser);
+    }
+
+    @Override
+    public int addUser(TUser user) {
+        return TUserDao.insert(user);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public int modifyUser(TUser user) {
+        return TUserDao.updateByPrimaryKeySelective(user);
+    }
+
+    @Override
+    public int DeleteUserById(Long fId) {
+        return TUserDao.deleteByPrimaryKey(fId);
     }
 }

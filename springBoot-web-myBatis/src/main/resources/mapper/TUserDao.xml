@@ -35,27 +35,27 @@
     select 
     <include refid="Base_Column_List" />
     from t_user
-    where f_user_id = #{fId,jdbcType=BIGINT}
+    where f_id = #{fId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from t_user
-    where f_user_id = #{fId,jdbcType=BIGINT}
+    where f_id = #{fId,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" keyColumn="f_user_id" keyProperty="fUserId" parameterType="com.powernode.entity.TUser" useGeneratedKeys="true">
-    insert into t_user (f_address, f_birthday, f_customface, 
+  <insert id="insert" keyColumn="f_id" keyProperty="fId" parameterType="com.powernode.entity.TUser" useGeneratedKeys="true">
+    insert into t_user (f_user_id,f_address, f_birthday, f_customface,
       f_customfacefmt, f_facetype, f_gender, 
-      f_id, f_mail, f_nickname, 
+      f_mail, f_nickname,
       f_owner_id, f_password, f_phonenumber, 
       f_register_time, f_remark, f_signature, 
       f_update_time, f_username)
-    values (#{fAddress,jdbcType=VARCHAR}, #{fBirthday,jdbcType=BIGINT}, #{fCustomface,jdbcType=VARCHAR}, 
+    values (#{fUserId,jdbcType=INTEGER},#{fAddress,jdbcType=VARCHAR}, #{fBirthday,jdbcType=BIGINT}, #{fCustomface,jdbcType=VARCHAR},
       #{fCustomfacefmt,jdbcType=VARCHAR}, #{fFacetype,jdbcType=INTEGER}, #{fGender,jdbcType=INTEGER}, 
-      #{fId,jdbcType=BIGINT}, #{fMail,jdbcType=VARCHAR}, #{fNickname,jdbcType=VARCHAR}, 
+      #{fMail,jdbcType=VARCHAR}, #{fNickname,jdbcType=VARCHAR},
       #{fOwnerId,jdbcType=BIGINT}, #{fPassword,jdbcType=VARCHAR}, #{fPhonenumber,jdbcType=VARCHAR}, 
       #{fRegisterTime,jdbcType=TIMESTAMP}, #{fRemark,jdbcType=VARCHAR}, #{fSignature,jdbcType=VARCHAR}, 
       #{fUpdateTime,jdbcType=TIMESTAMP}, #{fUsername,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" keyColumn="f_user_id" keyProperty="fUserId" parameterType="com.powernode.entity.TUser" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="f_id" keyProperty="fId" parameterType="com.powernode.entity.TUser" useGeneratedKeys="true">
     insert into t_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="fAddress != null">

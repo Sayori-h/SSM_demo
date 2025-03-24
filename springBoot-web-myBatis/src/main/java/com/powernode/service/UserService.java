@@ -3,8 +3,6 @@ package com.powernode.service;
 import com.github.pagehelper.PageInfo;
 import com.powernode.entity.TUser;
 
-import java.util.List;
-
 public interface UserService {
 
     TUser getUserById(Long userId);
@@ -12,4 +10,10 @@ public interface UserService {
     PageInfo<TUser> getUserByPage(Integer current);
 
     int upDateUser();
+
+    int addUser(TUser user);
+
+    int modifyUser(TUser user);
+
+    int DeleteUserById(Long fId);
 }
