@@ -76,8 +76,8 @@
       <if test="fGender != null">
         f_gender,
       </if>
-      <if test="fId != null">
-        f_id,
+      <if test="fUserId != null">
+        f_user_id,
       </if>
       <if test="fMail != null">
         f_mail,
@@ -129,8 +129,8 @@
       <if test="fGender != null">
         #{fGender,jdbcType=INTEGER},
       </if>
-      <if test="fId != null">
-        #{fId,jdbcType=BIGINT},
+      <if test="fUserId != null">
+        #{fUserId,jdbcType=BIGINT},
       </if>
       <if test="fMail != null">
         #{fMail,jdbcType=VARCHAR},

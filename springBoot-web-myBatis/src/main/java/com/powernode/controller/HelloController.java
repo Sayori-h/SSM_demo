@@ -8,6 +8,11 @@ import com.powernode.service.UserService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.concurrent.ExecutionException;
+
+import static java.lang.Thread.sleep;
+
 @Slf4j
 @RestController //这个类是一个控制器类（类似于servlet）
 public class HelloController {
@@ -41,13 +46,21 @@ public class HelloController {
     //如果前端请求路径在controller方法中找不到，那报404，比如访问/api/user就是404
     @GetMapping(value = "/web/user/{id}")
     public R describeUser(@PathVariable(value="id") Long fId) {
+        System.out.println(Thread.currentThread().threadId()+"--"+Thread.currentThread().getName());//主线程
         // 调用UserService获取用户数据（例如用户列表）
-        TUser userById = userService.getUserById(fId);
-        return R.OK(CodeEnum.OK, userById);
+        var userCompletableFuture = userService.getUserById(fId);//新线程执行,因为加了@Async注解
+        System.out.println(Thread.currentThread().threadId()+"--"+Thread.currentThread().getName());//主线程
+        TUser user= null;
+        try {
+            user = userCompletableFuture.get();
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException(e);
+        }
+        return R.OK(CodeEnum.OK, user);
     }
 
     @PostMapping(value = "/web/user")
-    public R addUser(TUser user) {
+    public R addUser(@RequestBody TUser user) {
         //log.info("用户创建请求参数：{}", new Gson().toJson(user)); // 调试级别日志
         // 新增业务校验（重要！）
         if (user.getFPassword() == null
@@ -63,7 +76,7 @@ public class HelloController {
     }
 
     @PutMapping(value = "/web/user")
-    public R modifyUser(TUser user) {
+    public R modifyUser(/*@RequestBody */TUser user) {
         // 调用UserService获取用户数据（例如用户列表）
         int res = userService.modifyUser(user);
         return res>=1?R.OK(CodeEnum.OK):R.FAIL(CodeEnum.FAIL);

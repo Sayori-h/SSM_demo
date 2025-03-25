@@ -3,9 +3,11 @@ package com.powernode.service;
 import com.github.pagehelper.PageInfo;
 import com.powernode.entity.TUser;
 
+import java.util.concurrent.CompletableFuture;
+
 public interface UserService {
 
-    TUser getUserById(Long userId);
+    CompletableFuture<TUser> getUserById(Long userId);
 
     PageInfo<TUser> getUserByPage(Integer current);
 

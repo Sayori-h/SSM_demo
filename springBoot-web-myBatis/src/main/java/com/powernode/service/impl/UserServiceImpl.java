@@ -8,10 +8,12 @@ import com.powernode.entity.TUser;
 import com.powernode.mapper.TUserDao;
 import com.powernode.service.UserService;
 import jakarta.annotation.Resource;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -19,9 +21,11 @@ public class UserServiceImpl implements UserService {
     @Resource
     private TUserDao TUserDao;
 
+    @Async
     @Override
-    public TUser getUserById(Long fId) {
-        return TUserDao.selectByPrimaryKey(fId);
+    public CompletableFuture<TUser> getUserById(Long fId) {
+        System.out.println(Thread.currentThread().threadId()+"--"+Thread.currentThread().getName());
+        return CompletableFuture.completedFuture(TUserDao.selectByPrimaryKey(fId));
     }
 
     @Override
@@ -44,7 +48,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int addUser(TUser user) {
-        return TUserDao.insert(user);
+        return TUserDao.insertSelective(user);
     }
 
     @Override

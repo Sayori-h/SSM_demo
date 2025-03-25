@@ -19,6 +19,30 @@ spring:
       #在MySQL数据库中，一个连接的最大存活时间通常是由wait_timeout参数来控制的。这个参数定义了非交互式连接可以保持空闲的最长时间，超过这个时间后，连接将被自动关闭。默认情况下，wait_timeout的值是28800秒，也就是8小时。不过，这个值是可以根据需要进行调整的。你可以通过修改MySQL的配置文件（通常是my.cnf或my.ini），在[mysqld]部分设置wait_timeout的值来更改最大连接存活时间。
       max-lifetime: 18000000
 
+  #springboot默认线程池的配置
+  task:
+    execution:
+      pool:
+        #核心线程数大小(cup的个数； 2*cpu个数)
+        core-size: 8
+        #是否允许核心线程超时
+        allow-core-thread-timeout: true
+        #最大线程数大小 (2*cpu个数+1)
+        max-size: 17
+        #线程空闲多久就可以销毁
+        keep-alive: 300s
+        #任务队列大小
+        queue-capacity: 1024
+        #如果设置为 false，则当应用程序上下文关闭时，任务执行池将不再接受新的任务。
+        shutdown:
+          accept-tasks-after-context-close: false
+      shutdown:
+        #这个配置选项决定了当应用程序关闭时，是否应该等待当前正在执行的任务完成。
+        await-termination: true
+        #如果需要等待线程执行完成，那么我应该等待多长时间（以毫秒、秒、分钟等为单位）来让当前正在执行的任务完成。
+        await-termination-period: 1m
+      #线程池的线程名称的前缀
+      thread-name-prefix: dlyk-thread-pool-
 
 server:
   port: 8080
