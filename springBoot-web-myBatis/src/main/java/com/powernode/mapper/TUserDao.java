@@ -20,4 +20,6 @@ public interface TUserDao {
     int updateByPrimaryKey(TUser record);
 
     List<TUser> selectByPage();
+
+    TUser selectByUsername(String username);
 }

@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * controller的返回结果统一使用该类进行封装
  *
@@ -52,4 +55,21 @@ public class R {
                 .msg(msg)
                 .build();
     }
+
+    // 在R类中添加
+    // 在R类中修改putData方法
+    @SuppressWarnings("unchecked")
+    public R putData(String key, Object value) {
+        if (this.data == null) {
+            this.data = new HashMap<String, Object>();
+        }
+        // 添加类型安全检查
+        if (!(this.data instanceof Map)) {
+            throw new IllegalStateException("Data must be a Map instance when using putData");
+        }
+        ((Map<String, Object>) this.data).put(key, value);
+        return this;
+    }
+
+
 }

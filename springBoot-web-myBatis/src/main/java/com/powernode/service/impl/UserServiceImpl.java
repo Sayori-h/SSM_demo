@@ -61,4 +61,9 @@ public class UserServiceImpl implements UserService {
     public int DeleteUserById(Long fId) {
         return TUserDao.deleteByPrimaryKey(fId);
     }
+
+    @Override
+    public TUser getUserByUsername(String username) {
+        return TUserDao.selectByUsername(username);
+    }
 }

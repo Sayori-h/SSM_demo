@@ -6,13 +6,19 @@ import com.powernode.result.R;
 import com.powernode.service.HelloService;
 import com.powernode.service.UserService;
 import jakarta.annotation.Resource;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
 import static java.lang.Thread.sleep;
 
+@Validated
 @Slf4j
 @RestController //这个类是一个控制器类（类似于servlet）
 public class HelloController {
@@ -60,16 +66,7 @@ public class HelloController {
     }
 
     @PostMapping(value = "/web/user")
-    public R addUser(@RequestBody TUser user) {
-        //log.info("用户创建请求参数：{}", new Gson().toJson(user)); // 调试级别日志
-        // 新增业务校验（重要！）
-        if (user.getFPassword() == null
-                &&user.getFId()==null
-                &&user.getFNickname()==null
-                &&user.getFUserId()==null) {
-            log.warn("非法参数：用户创建请求缺少必要字段");  // 警告级别日志
-            return R.FAIL(CodeEnum.INVALID_PARAM);
-        }
+    public R addUser(/*@RequestBody */@Valid TUser user) {
         int res = userService.addUser(user);
         log.info("用户创建结果：{}", res>0?"成功":"失败"); // 信息级别日志
         return R.OK(CodeEnum.OK);
@@ -87,5 +84,30 @@ public class HelloController {
         // 调用UserService获取用户数据（例如用户列表）
         int res = userService.DeleteUserById(fId);
         return res>=1?R.OK(CodeEnum.OK):R.FAIL(CodeEnum.FAIL);
+    }
+
+    @PostMapping(value = "/web/user/login")
+    public R login(
+            @RequestParam(value = "username")
+            @NotBlank(message = "用户名不能为空")
+            @Size(min = 4, max = 20, message = "用户名长度需4-20字符")
+            String username,
+
+            @RequestParam(value = "password")
+            @NotBlank(message = "密码不能为空")
+            @Size(min = 6, max = 180, message = "密码长度需6-180字符")
+            String password) {
+
+        // 实际业务逻辑示例（需替换为真实校验逻辑）
+        boolean loginSuccess = helloService.validateLogin(username, password);
+        if (!loginSuccess) {
+            return R.FAIL(CodeEnum.UNAUTHORIZED, "用户名或密码错误");
+        }
+
+        // 生成模拟token（需根据实际安全方案实现）
+        String token = UUID.randomUUID().toString();
+        return R.OK(CodeEnum.OK)
+                .putData("token", token)
+                .putData("userInfo", userService.getUserByUsername(username));
     }
 }

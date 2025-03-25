@@ -1,5 +1,8 @@
 package com.powernode.entity;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -13,6 +16,8 @@ public class TUser implements Serializable {
     /**
      * 用户ID
      */
+    @NotNull(message = "用户唯一标识不能为空")
+    @Positive(message = "用户唯一标识必须大于0")
     private Long fUserId;
 
     /**
@@ -48,6 +53,8 @@ public class TUser implements Serializable {
     /**
      * 自增ID
      */
+    @NotNull(message = "用户ID不能为空")
+    @Positive(message = "用户ID必须大于0")
     private Long fId;
 
     /**
@@ -58,6 +65,7 @@ public class TUser implements Serializable {
     /**
      * 用户昵称
      */
+    @NotBlank(message = "昵称不能为空")
     private String fNickname;
 
     /**
@@ -68,6 +76,7 @@ public class TUser implements Serializable {
     /**
      * 用户密码
      */
+    @NotBlank(message = "密码不能为空")
     private String fPassword;
 
     /**
