@@ -1,10 +1,13 @@
 package com.powernode.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -12,6 +15,7 @@ import java.time.LocalDateTime;
  * t_user
  */
 @Data
+@NoArgsConstructor
 public class TUser implements Serializable {
     /**
      * 用户ID
@@ -87,6 +91,7 @@ public class TUser implements Serializable {
     /**
      * 注册时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime fRegisterTime;
 
     /**
@@ -102,6 +107,7 @@ public class TUser implements Serializable {
     /**
      * 更新时间
      */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime fUpdateTime;
 
     /**
@@ -109,5 +115,6 @@ public class TUser implements Serializable {
      */
     private String fUsername;
 
+    @Serial
     private static final long serialVersionUID = 1L;
 }

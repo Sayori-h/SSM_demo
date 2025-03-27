@@ -10,6 +10,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,6 +52,7 @@ public class HelloController {
     //CURD  demo
     //如果前端请求路径在controller方法中找不到，那报404，比如访问/api/user就是404
     @GetMapping(value = "/web/user/{id}")
+    @Cacheable(cacheNames = "get",keyGenerator = "myKeyGenerator")
     public R describeUser(@PathVariable(value="id") Long fId) {
         System.out.println(Thread.currentThread().threadId()+"--"+Thread.currentThread().getName());//主线程
         // 调用UserService获取用户数据（例如用户列表）

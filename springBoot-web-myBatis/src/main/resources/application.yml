@@ -43,6 +43,11 @@ spring:
         await-termination-period: 1m
       #线程池的线程名称的前缀
       thread-name-prefix: dlyk-thread-pool-
+  data:
+    redis:
+      host: r-uf6equo22qet2znkvqpd.redis.rds.aliyuncs.com
+      port: 6379
+      password: Hu20010618!
 
 server:
   port: 8080
@@ -65,6 +70,7 @@ logging:
     org.mybatis: error
     #配置我们自己的类的日志打印级别
     com.powernode: debug
+    redis: debug
     #指定我们自定义的分组下的包采用什么日志打印级别
     #powernode: debug
 
